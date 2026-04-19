@@ -1,15 +1,12 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from users import views as users_views
 from django.conf.urls.static import static
 from django.conf import settings
 
-app_name = 'users'
-
-# KRISTEN: UNSURE IF WE WILL NEED ALL THESE
 urlpatterns = [
-    path('', users_views.index, name='home'),
-    path('', users_views.index.as_view(), name='home'),
-    path('api/users/', users_views.user_list),
-    path('api/users/<int:pk>/', users_views.user_detail),
-    path('api/users/published/', users_views.user_list_published)
+    path('', users_views.register, name='home'),
+    path('register/', users_views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

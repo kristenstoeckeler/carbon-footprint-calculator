@@ -1,8 +1,3 @@
-DROP DATABASE IF EXISTS carbon_footprint_db;
-CREATE DATABASE carbon_footprint_db;
-
-\c carbon_footprint_db
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
