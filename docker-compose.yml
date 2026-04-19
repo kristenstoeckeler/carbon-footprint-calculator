@@ -7,6 +7,8 @@ services:
       - ./app/:/usr/src/app/
     ports:
       - 8000:8000
+    env_file:
+      - ./app/.env
     environment:
       - DB_NAME=carbon_footprint_db
       - DB_USER=postgres
