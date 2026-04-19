@@ -1,7 +1,8 @@
-version: "3.8"
 services:
   web:
     build: ./app
+    ports:
+      - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./app/:/usr/src/app/
@@ -17,7 +18,8 @@ services:
       - DB_PORT=5432
       - DATABASE=postgres
     depends_on:
-      - pg
+      pg:
+        condition: service_healthy
   pg:
       container_name: pg_container
       image: postgres:13.2-alpine
@@ -32,6 +34,11 @@ services:
       volumes:
           - ./data:/data
           - ./data/misc/django_init.sql:/docker-entrypoint-initdb.d/1-django-init.sql
+      healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U postgres"]
+          interval: 10s
+          timeout: 5s
+          retries: 5
   pgadmin:
       container_name: pgadmin_container
       image: dpage/pgadmin4:5.2
