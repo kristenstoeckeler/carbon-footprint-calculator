@@ -5,8 +5,9 @@ from rest_framework import status
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from users.models import User as CustomUser
 
-from .models import Choice, Lifestyle
+from .models import Choice, Lifestyle, UserChoice
 from .serializers import ChoiceSerializer, LifestyleSerializer
 from rest_framework.decorators import api_view
 
@@ -27,11 +28,24 @@ class index(APIView):
 
 class list_all_footprints(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'footprints/tutorial_list.html'
+    template_name = 'footprints/choices_list.html'
 
     def get(self, request):
         queryset = Choice.objects.all()
-        return Response({'choices': queryset})
+        user_id = request.GET.get('user_id')
+        my_choices = []
+        selected_user = None
+
+        if user_id is not None:
+            selected_user = CustomUser.objects.filter(id=user_id).first()
+            my_choices = UserChoice.objects.filter(user_id=user_id).select_related('choice')
+
+        return Response({
+            'choices': queryset,
+            'my_choices': my_choices,
+            'user_id': user_id,
+            'selected_user': selected_user,
+        })
 
 
 @api_view(['GET'])
