@@ -44,7 +44,7 @@ def test_footprint_list_api_returns_json(client):
 	lifestyle = Lifestyle.objects.create(name="Food")
 	Choice.objects.create(name="Beef meal", carbon=27, lifestyle=lifestyle)
 
-	response = client.get("/api/footprints/")
+	response = client.get("/api/choices/")
 
 	assert response.status_code == 200
 	payload = response.json()

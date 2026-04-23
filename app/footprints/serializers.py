@@ -10,10 +10,13 @@ class LifestyleSerializer(serializers.ModelSerializer):
 
 class ChoiceSerializer(serializers.ModelSerializer):
     lifestyle = LifestyleSerializer(read_only=True)
+    lifestyle_id = serializers.PrimaryKeyRelatedField(
+        queryset=Lifestyle.objects.all(), source='lifestyle', write_only=True
+    )
 
     class Meta:
         model = Choice
-        fields = ('id', 'name', 'carbon', 'lifestyle')
+        fields = ('id', 'name', 'carbon', 'lifestyle', 'lifestyle_id')
 
 
 class UserChoiceSerializer(serializers.ModelSerializer):
