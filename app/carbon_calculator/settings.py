@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['carbon-footprint-calculator-263336225067.us-central1.run.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
