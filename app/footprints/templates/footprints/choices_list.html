@@ -7,6 +7,7 @@
         <ul>
           {% for choice in choices %}
           <li>{{ choice.name }}</li>
+          <li>{{ choice.carbon }} metric tons per year</li>
           {% endfor %}
         </ul>
       </div>
@@ -16,7 +17,7 @@
         {% if user_id %}
           {% if selected_user %}
             <div id="my-total-footprint">
-              <strong>Total Footprint:</strong> {{ selected_user.total_footprint }}
+              <strong>Total Footprint:</strong> {{ selected_user.total_footprint }} <p>metric tons per year</p>
             </div>
           {% else %}
             <p>User not found for id {{ user_id }}.</p>
