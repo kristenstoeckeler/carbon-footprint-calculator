@@ -6,7 +6,7 @@ Users can choose from a list of daily lifestyle habits and activities and calcul
 
 ## Technologies
 
-This is a Python application built using Django, PostgreSQL and Docker. It is hosted by AWS.
+This is a Python application built using Django, PostgreSQL and Docker. It is hosted by GCP.
 
 ## Available URLs
 

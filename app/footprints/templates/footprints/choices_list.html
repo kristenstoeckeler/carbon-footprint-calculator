@@ -4,10 +4,9 @@
 
 {% block content %}
 <div class="container">
-  <h2>Choices</h2>
   <div style="display: flex; gap: 2rem; align-items: flex-start;">
     <div>
-      <h3>All Choices</h3>
+      <h2>All Possible Lifestyle Choices</h2>
       <ul>
         {% for choice in choices %}
         <li>{{ choice.name }} - {{ choice.carbon }} metric tons per year</li>
@@ -16,7 +15,7 @@
     </div>
 
     <div id="my-choices">
-      <h3>{user.name}'s Choices</h3>
+      <h3>{{user.name}}'s Lifestyle Choices & Annual Carbon Footprint</h3>
       {% if user_id %}
       {% if selected_user %}
       <div id="my-total-footprint">
