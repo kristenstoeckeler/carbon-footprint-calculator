@@ -14,16 +14,13 @@
       </ul>
     </div>
 
+    {% if user_id %}
     <div id="my-choices">
-      <h3>{{selected_user.name}}'s Lifestyle Choices & Annual Carbon Footprint</h3>
-      {% if user_id %}
       {% if selected_user %}
+      <h3>{{ selected_user.name }}'s Lifestyle Choices & Annual Carbon Footprint</h3>
       <div id="my-total-footprint">
         <strong>Total Footprint:</strong> {{ selected_user.total_footprint }} metric tons per year
       </div>
-      {% else %}
-      <p>User not found for id {{ user_id }}.</p>
-      {% endif %}
       <ul>
         {% for user_choice in my_choices %}
         <li>{{ user_choice.choice.name }}</li>
@@ -32,9 +29,10 @@
         {% endfor %}
       </ul>
       {% else %}
-      <p>Add ?user_id=YOUR_USER_ID to this page URL to see My Choices.</p>
+      <p>User not found for id {{ user_id }}.</p>
       {% endif %}
     </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}
