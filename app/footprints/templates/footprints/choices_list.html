@@ -1,38 +1,41 @@
-<html>
-  <body>
-    <h1>Choices</h1>
-    <div style="display: flex; gap: 2rem; align-items: flex-start;">
-      <div>
-        <h2>All Choices</h2>
-        <ul>
-          {% for choice in choices %}
-          <li>{{ choice.name }}</li>
-          <li>{{ choice.carbon }} metric tons per year</li>
-          {% endfor %}
-        </ul>
-      </div>
+{% extends "footprints/base.html" %}
 
-      <div id="my-choices">
-        <h2>My Choices</h2>
-        {% if user_id %}
-          {% if selected_user %}
-            <div id="my-total-footprint">
-              <strong>Total Footprint:</strong> {{ selected_user.total_footprint }} <p>metric tons per year</p>
-            </div>
-          {% else %}
-            <p>User not found for id {{ user_id }}.</p>
-          {% endif %}
-          <ul>
-            {% for user_choice in my_choices %}
-            <li>{{ user_choice.choice.name }}</li>
-            {% empty %}
-            <li>No choices selected yet for this user.</li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>Add ?user_id=YOUR_USER_ID to this page URL to see My Choices.</p>
-        {% endif %}
-      </div>
+{% block title %}Choices{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Choices</h2>
+  <div style="display: flex; gap: 2rem; align-items: flex-start;">
+    <div>
+      <h3>All Choices</h3>
+      <ul>
+        {% for choice in choices %}
+        <li>{{ choice.name }} - {{ choice.carbon }} metric tons per year</li>
+        {% endfor %}
+      </ul>
     </div>
-  </body>
-</html>
+
+    <div id="my-choices">
+      <h3>{user.name}'s Choices</h3>
+      {% if user_id %}
+      {% if selected_user %}
+      <div id="my-total-footprint">
+        <strong>Total Footprint:</strong> {{ selected_user.total_footprint }} metric tons per year
+      </div>
+      {% else %}
+      <p>User not found for id {{ user_id }}.</p>
+      {% endif %}
+      <ul>
+        {% for user_choice in my_choices %}
+        <li>{{ user_choice.choice.name }}</li>
+        {% empty %}
+        <li>No choices selected yet for this user.</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>Add ?user_id=YOUR_USER_ID to this page URL to see My Choices.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
